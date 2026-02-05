@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dana Kaget</title>
+
+<style>
+body{
+  margin:0;
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-family:Arial, sans-serif;
+  background:url('https://cdn.store.link/products/gorooshop9948990/5tkdtu-screenshot_20260206-013508_dana.jpg?versionId=uxBxK9pl4w3iQx_GIYAV32SglOdUA3_K') no-repeat center center/cover;
+  overflow:hidden;
+}
+
+/* Popup */
+.popup{
+  display:none;
+  background:#fff;
+  width:90%;
+  max-width:320px;
+  padding:20px;
+  border-radius:14px;
+  text-align:center;
+  box-shadow:0 0 30px rgba(0,0,0,0.4);
+  animation:fadeIn 0.4s ease;
+}
+
+@keyframes fadeIn{
+  from{opacity:0; transform:scale(0.8);}
+  to{opacity:1; transform:scale(1);}
+}
+
+.popup h2{
+  font-size:18px;
+  margin-bottom:20px;
+}
+
+/* Buttons */
+.btn{
+  padding:10px 20px;
+  margin:5px;
+  border:none;
+  border-radius:8px;
+  cursor:pointer;
+  font-size:14px;
+  transition:0.15s;
+}
+
+.btn:active{
+  transform:scale(0.88);
+}
+
+.batal{ background:#ccc; }
+.lanjut{ background:#28a745; color:#fff; }
+
+/* Loading Screen */
+.loading{
+  display:none;
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background:#000;
+  justify-content:center;
+  align-items:center;
+  flex-direction:column;
+  color:#fff;
+  font-size:18px;
+}
+
+.spinner{
+  border:6px solid #f3f3f3;
+  border-top:6px solid #28a745;
+  border-radius:50%;
+  width:60px;
+  height:60px;
+  animation:spin 1s linear infinite;
+  margin-bottom:15px;
+}
+
+@keyframes spin{
+  0%{transform:rotate(0deg);}
+  100%{transform:rotate(360deg);}
+}
+
+.progress{
+  margin-top:10px;
+  font-size:22px;
+  font-weight:bold;
+}
+</style>
+</head>
+
+<body>
+
+<div class="popup" id="popup">
+  <h2>Apakah Anda ingin melanjutkan?</h2>
+  <button class="btn batal" onclick="batal()">Batal</button>
+  <button class="btn lanjut" onclick="lanjut()">Lanjut</button>
+</div>
+
+<div class="loading" id="loading">
+  <div class="spinner"></div>
+  <div>Memproses sistem...</div>
+  <div class="progress" id="progress">0%</div>
+</div>
+
+<!-- Suara klik -->
+<audio id="klikSound" src="https://www.soundjay.com/buttons/sounds/button-16.mp3"></audio>
+
+<script>
+// Popup muncul setelah 2 detik
+setTimeout(() => {
+  document.getElementById("popup").style.display="block";
+}, 2000);
+
+// Efek getar
+function getar(){
+  if(navigator.vibrate){
+    navigator.vibrate(100);
+  }
+}
+
+// Suara klik
+function bunyi(){
+  document.getElementById("klikSound").play();
+}
+
+// Tombol batal → redirect lain
+function batal(){
+  bunyi(); getar();
+  window.location.href="https://otieu.com/4/10572544";
+}
+
+// Tombol lanjut
+function lanjut(){
+  bunyi(); getar();
+
+  document.getElementById("popup").style.display="none";
+  document.getElementById("loading").style.display="flex";
+
+  let persen = 0;
+  let loadingInterval = setInterval(() => {
+    persen++;
+    document.getElementById("progress").innerText = persen + "%";
+
+    if(persen >= 100){
+      clearInterval(loadingInterval);
+      window.location.href="https://otieu.com/4/10572544";
+    }
+  }, 7);
+}
+</script>
+
+</body>
+  </html>
